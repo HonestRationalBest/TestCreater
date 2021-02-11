@@ -3,13 +3,13 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import AuthTeacher from "./pages/AuthTeacher";
 import AuthUser from "./pages/AuthUser";
 import Home from "./pages/Home";
-import None from "./pages/None";
+import TestCreater from "./pages/TestCreater";
 
 export const useRoutes = (isAuth) => {
     if (isAuth) {
         return (
             <Switch>
-                <Route path="/test_creater" render={() => <None />} />
+                <Route path="/test_creater" render={() => <TestCreater />} />
                 <Redirect to="/test_creater" />
             </Switch>
         )
