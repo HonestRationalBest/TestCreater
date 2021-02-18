@@ -1,10 +1,11 @@
 import React from "react";
-import style from "../static/style/Test_creater.module.sass";
 import { NavLink } from "react-router-dom";
 import add_button from "../static/img/add_button.svg";
 
 import TopNavBarAdmin from "../components/TopNavBarAdmin";
 import NavBarAdmin from "../components/NavBarAdmin";
+
+import style from "../static/style/Test_creater.module.sass";
 
 const TestCreater: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const TestCreater: React.FC = () => {
                     <li>тест к лекции 3</li>
                     <li>тест к лекции 3</li>
                   </ul>
+
                   <img alt="add" src={add_button} className={style.add} />
                 </div>
               </div>
