@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import done from "../static/img/done.svg";
 import add_button from "../static/img/add_button.svg";
@@ -9,18 +9,17 @@ import TopNavBarAdmin from "../components/TopNavBarAdmin";
 import NavBarAdmin from "../components/NavBarAdmin";
 
 import style from "../static/style/Test_creater.module.sass";
-import { initialStateType } from "../redux/reducers/createrReducer";
+import { createTest } from "../redux/actions/CREATE_TEST";
 
 const TestCreater: React.FC = () => {
-  //TODO
-  const creater = useSelector<initialStateType>((state: any) => state.creater);
-  console.log(creater);
+  const dispatch = useDispatch();
+
   const [visibleToggle, setVisibleToggle] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
 
   const [section, setSection] = useState<string>("");
-  const [questionCount, setQuestionCount] = useState<Number | null>(0);
-  const [testName, setTestName] = useState<String>("");
+  const [questionCount, setQuestionCount] = useState<number>(0);
+  const [testName, setTestName] = useState<string>("");
 
   const arr: Array<string> = ["тест 1", "тест 2", "тест 1"];
 
@@ -29,7 +28,9 @@ const TestCreater: React.FC = () => {
     setVisibleToggle(!visibleToggle);
   };
 
-  useEffect(() => {}, [section, questionCount, testName]);
+  useEffect(() => {
+    dispatch(createTest(section, questionCount, testName, isRandom));
+  }, [section, questionCount, testName, isRandom, dispatch]);
 
   return (
     <div>
@@ -90,7 +91,7 @@ const TestCreater: React.FC = () => {
                 {isRandom ? <img src={done} alt="ok" /> : " "}
               </button>
             </div>
-            <NavLink to="/question_wrapper">
+            <NavLink to="/create_test">
               <button className={style.next}>далее</button>
             </NavLink>
           </div>

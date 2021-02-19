@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import AuthTeacher from "./pages/AuthTeacher";
 import AuthUser from "./pages/AuthUser";
+import CreateNewTest from "./pages/CreateNewTest";
 import Home from "./pages/Home";
 import None from "./pages/None";
 import TestCreater from "./pages/TestCreater";
@@ -13,6 +14,7 @@ export const useRoutes = (isAuth) => {
             <Switch>
                 <Route path="/test_creater" render={() => <TestCreater />} />
                 <Route path="/testing" render={() => <Testing />} />
+                <Route path="/create_test" render={() => <CreateNewTest />} />
                 <Route path="/theory" render={() => <None />} />
                 <Route path="/practice" render={() => <None />} />
                 <Route path="/data_base" render={() => <None />} />

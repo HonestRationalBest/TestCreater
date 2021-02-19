@@ -1,3 +1,11 @@
+@font-face
+    font-family: NotoSerifMedium
+    src: url(../fonts/NotoSerif-Medium.ttf)
+
+@font-face
+    font-family: NotoSansRegular
+    src: url(../fonts/NotoSans-Regular.ttf)
+
 .header
     background: #5E44E3
     border-radius: 0 0 0 20px
@@ -33,3 +41,56 @@
 
 .menu:hover .help
     opacity: 1
+
+.question_wrapper
+    p
+        color: black
+        font-family: NotoSansRegular
+        font-size: 25px
+    &_flex_wrapper
+        display: flex
+        justify-content: space-between
+
+.number_of_question
+    font-family: NotoSerifMedium
+    margin-left: 25px
+
+.choose p
+    margin-left: 35px
+    font-size: 16px
+
+.textarea
+    background: 0px
+    margin-left: 35px
+    border: none
+    width: 600px
+    height: 20px
+    font-family: NotoSansRegular
+    resize: vertical
+    font-size: 16px
+
+.choose label
+    display: block
+
+.table_wrapper
+    display: table
+
+.choose label:first-child
+    margin-top: 60px
+
+.circle
+    display: flex
+    align-items: center
+    width: 20px
+    height: 20px
+    border-radius: 50%
+    border: 1px solid #5f44e7
+    margin-right: 10px
+    margin-top: 34px
+    margin-left: 160px
+
+.active
+    background: blue
+
+.input
+    display: none
