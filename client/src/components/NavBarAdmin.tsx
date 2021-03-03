@@ -29,7 +29,7 @@ const NavBarAdmin: React.FC = () => {
                 <CreateIcon />
                 <li>Конструктор тестов</li>
               </NavLink>
-              <NavLink to="/testing">
+              <NavLink to="/testingedit">
                 <EventNoteIcon />
                 <li>Тестирование</li>
               </NavLink>
@@ -41,7 +41,7 @@ const NavBarAdmin: React.FC = () => {
                 <ImportantDevicesIcon />
                 <li>Практика</li>
               </NavLink>
-              <NavLink to="/data_base">
+              <NavLink to="/data_base" className={style.database}>
                 <SettingsIcon />
                 <li>База данных</li>
               </NavLink>

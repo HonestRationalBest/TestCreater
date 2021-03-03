@@ -5,7 +5,7 @@ import Test from "./Test";
 const TestingWrapper: React.FC = () => {
   return (
     <div className={style.testing_wrapper_wrapper}>
-      <input placeholder="<<Bведите текст>>" />
+      <h2>Раздел №1</h2>
       <div className={style.flex_wrapper}>
         <Test />
         <Test />

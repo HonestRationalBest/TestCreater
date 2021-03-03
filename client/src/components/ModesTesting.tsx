@@ -7,23 +7,30 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
 import style from "../static/style/NavBars.module.sass";
 
-const TopNavBarAdmin: React.FC = () => {
+const ModesTesting: React.FC = () => {
 
   const [toggleMenu, setToggleMenu] = useState<boolean>(false)
 
   return (
     <div className={style.top_navbar_wrapper}>
-      <div>
         <ul className={style.modes}>
           <li>
-            <NavLink to="/test_creater"></NavLink>
+            <NavLink to="/testingedit"
+            activeStyle={{
+                color: "#000"
+              }}
+              >Редактирование</NavLink>
+          </li>
+          <li>
+            <NavLink to="/testingwatch"  activeStyle={{
+                color: "#000"
+              }}>Режим просмотра</NavLink>
           </li>
         </ul>
-      </div>
       <div className={style.user} onClick={()=>setToggleMenu(!toggleMenu)}>
         <p>user</p>
         <div className={style.circle}></div>
-        {toggleMenu && <div className={style.menu}>
+        { toggleMenu && <div className={style.menu}>
           <ul>
             <li>
               <NavLink to="/" className={style.gradient}>
@@ -37,4 +44,4 @@ const TopNavBarAdmin: React.FC = () => {
   );
 };
 
-export default TopNavBarAdmin;
+export default ModesTesting;

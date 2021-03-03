@@ -1,7 +1,14 @@
+@font-face{
+    font-family: NotoSansRegular;
+    src: url(../fonts/NotoSans-Regular.ttf);
+}
+ 
+
 .topic_wrapper{
     background: #fff;
     margin-top: 20px;
 }
+
 
 .flex_wrapper{
     display: flex;
@@ -29,4 +36,6 @@
 
 .add_button{
     margin: 0px 0px 25px 20px;
+    cursor: pointer;
 }
+

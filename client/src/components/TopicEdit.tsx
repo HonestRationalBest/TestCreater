@@ -15,7 +15,7 @@ const TopicEdit = () => {
             <div className={style.flex_wrapper}>
                 <h2>Lol</h2>
                 <img src={close_button} className={style.close_button} />
-            </div>
+            </div>  
             <div className={style.book_wrapper}>
             <Book/>
             <Book/>
@@ -25,6 +25,7 @@ const TopicEdit = () => {
             <Book/>
             <img src={add_button} alt="add_button" className={style.add_button}/>
             </div>
+
         </div>
     );
 }

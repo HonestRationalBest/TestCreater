@@ -1,13 +1,14 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 import NavBarAdmin from "../components/NavBarAdmin";
+import TopNavBarAdmin from "../components/TopNavBarAdmin";
 import TopicEdit from "../components/TopicEdit";
-import ModesTheory from "../components/ModesTheory";
 
 import style from "../static/style/Theory.module.sass"
+import { JsxChild } from "typescript";
+import ModesTheory from "../components/ModesTheory";
 
-const TheoryEdit = () => {
+const TheoryWatch = () => {
 
     //TODO добавление файлов
 
@@ -26,16 +27,14 @@ const TheoryEdit = () => {
                 {elemTopic}
                 </div>
                 <div className={style.new_section_wrapper}>
-                <NavLink to="/add_section_theory"><button className={style.new_section} >
+                <button className={style.new_section} >
                     добавить
                 </button>
-                </NavLink>
                 </div>
            
             </div>
-         
         </div>
     );
 }
 
-export default TheoryEdit;
+export default TheoryWatch;
