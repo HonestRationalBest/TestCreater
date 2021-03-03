@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import None from "./pages/None";
 import TestCreater from "./pages/TestCreater";
 import Testing from "./pages/Testing";
+import TheoryEdit from "./pages/TheoryEdit";
 
 export const useRoutes = (isAuth) => {
     if (isAuth) {
@@ -15,7 +16,7 @@ export const useRoutes = (isAuth) => {
                 <Route path="/test_creater" render={() => <TestCreater />} />
                 <Route path="/testing" render={() => <Testing />} />
                 <Route path="/create_test" render={() => <CreateNewTest />} />
-                <Route path="/theory" render={() => <None />} />
+                <Route path="/theoryedit" render={() => <TheoryEdit />} />
                 <Route path="/practice" render={() => <None />} />
                 <Route path="/data_base" render={() => <None />} />
                 <Redirect to="/test_creater" />

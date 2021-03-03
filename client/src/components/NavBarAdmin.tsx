@@ -33,7 +33,7 @@ const NavBarAdmin: React.FC = () => {
                 <EventNoteIcon />
                 <li>Тестирование</li>
               </NavLink>
-              <NavLink to="/theory">
+              <NavLink to="/theoryedit">
                 <ExtensionIcon />
                 <li>Теория</li>
               </NavLink>

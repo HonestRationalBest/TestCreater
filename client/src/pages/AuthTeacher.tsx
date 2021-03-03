@@ -18,7 +18,7 @@ const AuthTeacher:React.FC = () => {
 
     const { request } = useHttp();
 
-    const [form, setForm] = useState({
+            const [form, setForm] = useState({
         name: '',
         password: '',
     })
