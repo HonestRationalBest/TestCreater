@@ -6,6 +6,7 @@ import add_button from "../static/img/add_button.svg";
 
 
 import style from "../static/style/Theory.module.sass"
+import { NavLink } from 'react-router-dom';
 
 const AddSectionTheory = () =>{
     //TODO вёрстка 
@@ -15,15 +16,21 @@ const AddSectionTheory = () =>{
             <TheoryEdit/>
             <div className={style.background}></div>
             <div className={style.window}>
-                <img src={cross} alt="cross"/>
+                <NavLink to="/theoryedit"><img src={cross} alt="cross"/></NavLink>
                 <div className={`${style.field_wrapper} ${style.first_field}`}>
                     <h3>Выберете файл</h3>
-                    <input placeholder="Выберете файл"/>
+                    <input placeholder="выберете файл"/>
                     <img src={add_button}/>
                 </div>
                 <div className={style.field_wrapper}>
-                    <h3></h3>
-                    <input/>
+                    <h3>Введите название</h3>
+                    <input  placeholder="введите название которое будет у файла"/>
+                </div>
+                <div className={style.add_section_wrapper}>
+                <NavLink to="/theoryedit"><button className={style.new_section} >
+                    добавить
+                </button>
+                </NavLink>
                 </div>
             </div>
         </>

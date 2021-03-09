@@ -39,3 +39,6 @@
     cursor: pointer;
 }
 
+.add_input{
+    display: none;
+}

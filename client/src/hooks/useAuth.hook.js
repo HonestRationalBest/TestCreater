@@ -1,6 +1,6 @@
 import React from "react";
 
-const storageName = 'userData'
+const storageName = 'userId'
 
 export const useAuth = () => {
     const [ready, setReady] = React.useState(false);
@@ -9,9 +9,7 @@ export const useAuth = () => {
     const login = React.useCallback((id) => {
         setUserId(id);
 
-        localStorage.setItem(storageName, JSON.stringify({
-            userId: id
-        }))
+        localStorage.setItem(storageName, id)
     }, [])
 
     const logout = React.useCallback(() => {
@@ -20,9 +18,9 @@ export const useAuth = () => {
     }, [])
 
     React.useEffect(() => {
-        const data = JSON.parse(localStorage.getItem(storageName))
-        if (data && data.token) {
-            login(data.token, data.userId)
+        const data = localStorage.getItem(storageName)
+        if (data) {
+            login(data.userId)
         }
         setReady(true);
     }, [])

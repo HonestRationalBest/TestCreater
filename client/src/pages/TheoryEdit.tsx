@@ -13,8 +13,8 @@ const TheoryEdit = () => {
 
     const arr:Array<any> = [1,2,3]
 
-    const elemTopic = arr.map(()=>{
-        return <TopicEdit />
+    const elemTopic = arr.map((el)=>{
+        return <TopicEdit key={el}/>
     })
 
     return (

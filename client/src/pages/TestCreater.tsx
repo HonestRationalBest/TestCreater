@@ -91,9 +91,7 @@ const TestCreater: React.FC = () => {
                 {isRandom ? <img src={done} alt="ok" /> : " "}
               </button>
             </div>
-            <NavLink to="/create_test">
               <button className={style.next}>далее</button>
-            </NavLink>
           </div>
         </div>
       </div>
