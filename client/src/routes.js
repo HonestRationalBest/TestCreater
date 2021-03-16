@@ -26,6 +26,7 @@ export const useRoutes = (isAuth) => {
                 <Route path="/practice" render={() => <None />} />
                 <Route path="/data_base" render={() => <None />} />
                 <Redirect to="/test_creater" />
+                <Redirect to="/theoryedit" />
             </Switch>
         )
     } else {

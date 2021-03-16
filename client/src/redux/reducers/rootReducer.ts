@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import createrReducer from './createrReducer';
+import theoryReducer from './theoryReducer';
 
 
 const rootReducer = combineReducers({
-    creater: createrReducer
+    theory: theoryReducer
 })
 
 export default rootReducer;

@@ -8,9 +8,7 @@ const app = express()
 app.use(express.static('public'));
 app.use(express.json({ limit: '50mb', extended: true }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
-app.use(fileUpload({
-    createParentPath: true
-}))
+app.use(fileUpload())
 app.use(cors())
 
 app.use('/api/auth', require('./routes/auth.routes'))

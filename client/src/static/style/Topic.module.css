@@ -42,3 +42,7 @@
 .add_input{
     display: none;
 }
+
+.close_button{
+    cursor: pointer;
+}

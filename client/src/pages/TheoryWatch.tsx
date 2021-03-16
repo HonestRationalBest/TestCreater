@@ -1,22 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import NavBarAdmin from "../components/NavBarAdmin";
-import TopNavBarAdmin from "../components/TopNavBarAdmin";
 import TopicEdit from "../components/TopicEdit";
+import ModesTheory from "../components/ModesTheory";
 
 import style from "../static/style/Theory.module.sass"
-import { JsxChild } from "typescript";
-import ModesTheory from "../components/ModesTheory";
+import axios from "axios";
+import { setSection } from "../redux/actions/SET_SECTION";
+
 
 const TheoryWatch = () => {
 
     //TODO добавление файлов
 
-    const arr:Array<any> = [1,2,3]
+    const sections:any= useSelector<any>(state => state.theory.section)
+    const dispatch = useDispatch()
+    const id:string | null = localStorage.getItem('userId')
 
-    const elemTopic = arr.map(()=>{
-        return <TopicEdit />
-    })
+    const arr= [1,2]
+    useEffect(() => {
+        axios.get(`/api/theory/get_sections/${id}`).then((res)=>{
+            dispatch(setSection(res.data))
+        })
+    }, [])
+
+    console.log(sections)
 
     return (
         <div className={style.wrapper}>
@@ -24,7 +34,13 @@ const TheoryWatch = () => {
             <div className={style.content_wrapper}>
                 <ModesTheory />
                 <div className={style.materials_wrapper}>
-                {elemTopic}
+                {typeof (sections === Array) ? 
+                sections.map((el:any)=>{
+                    return <TopicEdit sectionId={el._id} key={el._id} sectionName={el.name}/>
+                })
+                :
+                <div></div>
+                }
                 </div>
                 <div className={style.new_section_wrapper}>
                 <button className={style.new_section} >
