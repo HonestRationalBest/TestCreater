@@ -15,7 +15,7 @@ const Home: React.FC = () => {
         <div className={style.content}>
           <h2>Делай учебу интересной и познавательной </h2>
           <div className={style.button_wrapper}>
-            <NavLink to="/student" className={style.link_student}>
+            <NavLink to="/register" className={style.link_student}>
               <button className={style.student}>я студент (-ка)</button>
             </NavLink>
             <NavLink to="/teacher" className={style.link_teacher}>

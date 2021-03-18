@@ -16,11 +16,13 @@ router.post(
             const {fileName} = req.body
             const {fileUrl} = req.body
             const { id } = req.params
+            const {sectionId} = req.body
 
             const theory = new Theory({
                 ownerId: id,
                 name : fileName,
-                link: fileUrl
+                link: fileUrl , 
+                sectionId
             })
 
             theory.save((error)=>{  
@@ -89,12 +91,9 @@ router.delete(
     async (req, res) => {
         try {
 
-            const { sectionId } = req.params
-
-            Section.deleteOne({_id: sectionId}, async (err, users) => {
-
+            Section.findByIdAndRemove(  req.params.id, async (err, users) => {
                 if (err) return console.log(err);
-                return res.send(users)
+                return res.send({msg: "Section was deleted!"})
             });
 
         } catch (e) {

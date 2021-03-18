@@ -4,7 +4,9 @@ import AddSectionTheory from "./pages/AddSectionTheory";
 import AuthTeacher from "./pages/AuthTeacher";
 import AuthUser from "./pages/AuthUser";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import None from "./pages/None";
+import Register from "./pages/Register";
 import TestCreater from "./pages/TestCreater";
 import TestingEdit from "./pages/TestingEdit";
 import TheoryEdit from "./pages/TheoryEdit";
@@ -33,8 +35,9 @@ export const useRoutes = (isAuth) => {
         return (
             <Switch>
                 <Route exact path="/" render={() => <Home />} />
-                <Route exact path="/teacher" render={() => <AuthTeacher />} />
-                <Route exact path="/student" render={() => <AuthUser />} />
+                <Route exact path="/login" render={() => <Login />} />
+                <Route exact path="/student_register" render={() => <Register />} />
+                <Route exact path="/teacher_register" render={() => <Register />} />
             </Switch>
         )
     }

@@ -12,7 +12,7 @@ import { setSection } from "../redux/actions/SET_SECTION";
 
 const TheoryEdit = () => {
 
-    //TODO добавление файлов
+    //TODO отображение удалённого файла
 
 
     const sections:any= useSelector<any>(state => state.theory.section)
