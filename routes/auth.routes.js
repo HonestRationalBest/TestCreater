@@ -1,17 +1,23 @@
 const { Router } = require('express')
 const { check, validationResult } = require("express-validator")
-const Admin = require('../models/Admin')
+const Teacher = require('../models/Teacher')
+const Student = require('../models/Student')
 const router = Router()
 
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const config = require('config')
 
-
+// /api/auth/register
 router.post(
-    '/login_admin',
+    '/register',
     [
-        check('name', 'Not correct email').exists(),
-        check('password', 'Enter a password').exists(),
+        check('email', 'Not correct email').isEmail(),
+        check('password', 'Password too small, min lenght 6').isLength({ min: 6 }),
+        check('name', 'Name is required!').isLength({ min: 1 })
     ],
     async (req, res) => {
+
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
@@ -20,15 +26,49 @@ router.post(
                     message: "Incorrect data!"
                 })
             }
-            const { name, password } = req.body
+            const { email, password, name, history } = req.body
 
-            const user = await Admin.findOne({ name })
+            if(history === "/teacher_register"){
 
-            res.json({ userId: user._id })
+                const candidate = await Teacher.findOne({ email })
+    
+                if (candidate) {
+                    res.status(400).json({ message: "This user already exist!" })
+                } else {
+    
+                    const hashpassword = await bcrypt.hash(password, 12);
+    
+                    const user = new Teacher({
+                        email,
+                        name,
+                        password: hashpassword,
+                    })
+                    await user.save()
+    
+                    res.status(200).json({ message: "User has been created!" })
+                }
+            }else{
+                const candidate = await Student.findOne({ email })
+    
+                if (candidate) {
+                    res.status(400).json({ message: "This user already exist!" })
+                } else {
+    
+                    const hashpassword = await bcrypt.hash(password, 12);
+    
+                    const user = new Student({
+                        email,
+                        name,
+                        password: hashpassword,
+                    })
+
+                    await user.save()
+    
+                    res.status(200).json({ message: "User has been created!" })
+                }
+            }
 
         } catch (e) {
             res.status(500).json({ message: "Server error" })
         }
-    })
-
-module.exports = router
+})

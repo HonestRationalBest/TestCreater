@@ -15,10 +15,10 @@ const Home: React.FC = () => {
         <div className={style.content}>
           <h2>Делай учебу интересной и познавательной </h2>
           <div className={style.button_wrapper}>
-            <NavLink to="/register" className={style.link_student}>
+            <NavLink to="/student_register" className={style.link_student}>
               <button className={style.student}>я студент (-ка)</button>
             </NavLink>
-            <NavLink to="/teacher" className={style.link_teacher}>
+            <NavLink to="/teacher_register" className={style.link_teacher}>
               <button className={style.teacher}>я преподаватель</button>
             </NavLink>
           </div>
