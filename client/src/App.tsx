@@ -6,7 +6,7 @@ import { useRoutes } from './routes';
 import style from './static/style/Body.module.sass';
 
 const App:React.FC = () =>{
-  const { login, logout, userId } = useAuth()
+  const { login, logout, userId, token } = useAuth()
 
   let isAuth:boolean = !!userId;
   
@@ -14,7 +14,7 @@ const App:React.FC = () =>{
 
   return (
     <AuthContext.Provider value={{
-       login, logout,isAuth, userId
+       login, logout,isAuth, userId, token
     }}>
     <div className={style.wrapper}>
       {routes}

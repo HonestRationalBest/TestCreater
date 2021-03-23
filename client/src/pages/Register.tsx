@@ -17,16 +17,16 @@ import axios from "axios";
 const Register:React.FC = () => {
 
     const [login, setLogin] = useState('')
-    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const history = useHistory()
 
-    console.log(history.location.pathname)
-
     const registerHandler = () =>{
-        
-        axios.post("/api/auth/register", {history, login, name, password},
+
+        axios.post('/api/auth/register', 
+        {history: history.location.pathname, 
+            login, email, password},
         {
             headers: {
                 'Content-Type': 'application/json'
@@ -34,6 +34,7 @@ const Register:React.FC = () => {
         }).then((res)=>{
             console.log(res)
         })
+        
     }
 
 
@@ -46,19 +47,19 @@ const Register:React.FC = () => {
                 <label>
                     <div className={style.input_wrapper_student}>
                         <Input placeholder="Bведите логин" 
-                        required autoFocus autoComplete="name" id="name" 
+                        required  type="text"
                         value={login} onChange={(e)=>setLogin(e.target.value)}/>
                         <img src={Profile} alt="person" className={style.icon} />
                     </div>
                     <div className={style.input_wrapper_student}>
                         <Input placeholder="Введите e-mail" 
-                        required autoFocus autoComplete="name" id="name" 
-                        value={name} onChange={(e)=>setName(e.target.value)}/>
+                        required  type="email"
+                        value={email} onChange={(e)=>setEmail(e.target.value)}/>
                         <img src={Message} alt="person" className={style.icon} />
                     </div>
                     <div className={style.input_wrapper_student}>
                         <Input placeholder="Введите пароль" 
-                        required autoFocus autoComplete="name" id="name"
+                        required type="password"
                         value={password} onChange={(e)=>setPassword(e.target.value)} />
                         <img src={Lock} alt="person" className={style.icon} />
                     </div>

@@ -8,15 +8,14 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const config = require('config')
 
-// /api/auth/register
 router.post(
-    '/register',
+   '/register',
     [
         check('email', 'Not correct email').isEmail(),
         check('password', 'Password too small, min lenght 6').isLength({ min: 6 }),
-        check('name', 'Name is required!').isLength({ min: 1 })
+        check('login', 'Name is required!').isLength({ min: 1 })
     ],
-    async (req, res) => {
+   async (req, res) => {
 
         try {
             const errors = validationResult(req);
@@ -26,7 +25,7 @@ router.post(
                     message: "Incorrect data!"
                 })
             }
-            const { email, password, name, history } = req.body
+            const {history, login, email, password} = req.body
 
             if(history === "/teacher_register"){
 
@@ -40,7 +39,7 @@ router.post(
     
                     const user = new Teacher({
                         email,
-                        name,
+                        name: login,
                         password: hashpassword,
                     })
                     await user.save()
@@ -58,7 +57,7 @@ router.post(
     
                     const user = new Student({
                         email,
-                        name,
+                        name: login,
                         password: hashpassword,
                     })
 
@@ -72,3 +71,57 @@ router.post(
             res.status(500).json({ message: "Server error" })
         }
 })
+
+router.post(
+    '/login',
+    [
+        check('email', 'Not correct email').isEmail().normalizeEmail(),
+        check('password', 'Enter a password').exists(),
+    ],
+    async (req, res) => {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({
+                    errors: errors.array(),
+                    message: "Incorrect data!"
+                })
+            }
+            const { email, password, history } = req.body
+
+            const bcryptPassANdCreateToken = async (user) =>{
+                const isMatch = await bcrypt.compare(password, user.password)
+
+                if (!isMatch) {
+                    return res.status(400).json({ message: "Not valid password!" })
+                }
+                const token = jwt.sign(
+                    { userId: user.id },
+                    config.get('jwtSecret'),
+                    { expiresIn: "1h" }
+                )
+    
+                res.json({ token, userId: user.id })
+            }
+
+            if(history ==="/teacher_login"){
+                const user = await Teacher.findOne({ email })
+                if (!user) {
+                    return res.status(400).json({ message: "User was not found!" })
+                }
+                bcryptPassANdCreateToken(user)
+            }else{
+                const user = await Student.findOne({ email })
+                if (!user) {
+                    return res.status(400).json({ message: "User was not found!" })
+                }
+                bcryptPassANdCreateToken(user)
+            }
+          
+
+        } catch (e) {
+            res.status(500).json({ message: "Server error" })
+        }
+    })
+
+module.exports = router;
