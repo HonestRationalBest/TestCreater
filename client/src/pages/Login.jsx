@@ -36,6 +36,29 @@ const Login= () => {
     }
 
 
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const history = useHistory()
+    const auth = useContext(AuthContext)
+
+    const loginHandler = () =>{
+
+        axios.post('/api/auth/login', 
+        {history: history.location.pathname, 
+            email, password},
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((res)=>{
+            console.log(res)
+            auth.login(res.data.token, res.data.userId)
+        })
+        
+    }
+
+
     return (
         <div className={style.wrapper}>
             <Header />
