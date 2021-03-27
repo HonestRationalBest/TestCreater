@@ -1,8 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+
 import AddSectionTheory from "./pages/AddSectionTheory";
-import AuthTeacher from "./pages/AuthTeacher";
-import AuthUser from "./pages/AuthUser";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import None from "./pages/None";
@@ -35,9 +34,11 @@ export const useRoutes = (isAuth) => {
         return (
             <Switch>
                 <Route exact path="/" render={() => <Home />} />
-                <Route exact path="/login" render={() => <Login />} />
+                <Route exact path="/student_login" render={() => <Login />} />
+                <Route exact path="/teacher_login" render={() => <Login />} />
                 <Route exact path="/student_register" render={() => <Register />} />
                 <Route exact path="/teacher_register" render={() => <Register />} />
+                <Redirect to="/" />
             </Switch>
         )
     }

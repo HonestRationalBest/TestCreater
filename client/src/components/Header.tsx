@@ -8,7 +8,6 @@ const Header:React.FC= () =>{
 
     const history = useHistory()
 
-    console.log(history.location.pathname)
 
     return(
         <header className={style.header}>
@@ -18,9 +17,15 @@ const Header:React.FC= () =>{
             <div className={style.menu}>
 
             {history.location.pathname === "/" ? <NavLink to="/"></NavLink> :
-              history.location.pathname === "/register"
-              ? <NavLink to="/login">Войти</NavLink>
-              : <NavLink to="/register">Создать аккаунт</NavLink>  }
+              history.location.pathname === "/student_register"
+              ? <NavLink to="/student_login">Войти</NavLink>
+              : history.location.pathname === "/teacher_register"
+              ? <NavLink to="/teacher_login">Войти</NavLink>
+              : history.location.pathname === "/student_login"
+              ? <NavLink to="/student_register">Создать аккаунт</NavLink>
+              : <NavLink to="/teacher_register">Создать аккаунт</NavLink>
+
+             }
             </div>
           </div>
         </div>

@@ -5,21 +5,22 @@ import { useRoutes } from './routes';
 
 import style from './static/style/Body.module.sass';
 
-const App:React.FC = () =>{
-  const { login, logout, userId } = useAuth()
+const App = () =>{
 
-  let isAuth:boolean = !!userId;
+   const { login, logout, userId, token } = useAuth()
+
+   let isAuth = !!token;
   
   const routes = useRoutes(isAuth)
 
   return (
     <AuthContext.Provider value={{
-       login, logout,isAuth, userId
+       login, logout, isAuth, userId, token
     }}>
     <div className={style.wrapper}>
       {routes}
     </div>
-    </AuthContext.Provider>
+     </AuthContext.Provider>
   );
 }
 

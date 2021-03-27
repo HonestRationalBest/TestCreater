@@ -2,39 +2,37 @@ import React, {useState, useContext} from "react";
 
 import Header from "../components/Header";
 import { Input } from '@material-ui/core';
-import { useHttp } from "../hooks/useHttp";
 import { AuthContext } from "../context/AuthContext";
 
 import Lock from "../static/img/Lock.svg";
 import Message from "../static/img/Message.svg";
-import Profile from "../static/img/Profile.svg";
 
 import style from '../static/style/Home_and_Auth.module.sass';
 import { useHistory } from "react-router";
 import axios from "axios";
 
 
-const Register:React.FC = () => {
+const Login= () => {
 
-    const [login, setLogin] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const history = useHistory()
+    const auth = useContext(AuthContext)
 
-    const registerHandler = () =>{
+    const loginHandler = () =>{
 
-        axios.post('/api/auth/register', 
+        axios.post('/api/auth/login', 
         {history: history.location.pathname, 
-            login, email, password},
+            email, password},
         {
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then((res)=>{
             console.log(res)
-        })
-        
+            auth.login(res.data.token, res.data.userId)
+        })    
     }
 
 
@@ -46,25 +44,15 @@ const Register:React.FC = () => {
                 <h1>Добро пожаловать!</h1>
                 <label>
                     <div className={style.input_wrapper_student}>
-                        <Input placeholder="Bведите логин" 
-                        required  type="text"
-                        value={login} onChange={(e)=>setLogin(e.target.value)}/>
-                        <img src={Profile} alt="person" className={style.icon} />
-                    </div>
-                    <div className={style.input_wrapper_student}>
-                        <Input placeholder="Введите e-mail" 
-                        required  type="email"
-                        value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                        <Input placeholder="Введите e-mail" required value={email} onChange={(e)=>setEmail(e.target.value)} type="email"/>
                         <img src={Message} alt="person" className={style.icon} />
                     </div>
                     <div className={style.input_wrapper_student}>
-                        <Input placeholder="Введите пароль" 
-                        required type="password"
-                        value={password} onChange={(e)=>setPassword(e.target.value)} />
-                        <img src={Lock} alt="person" className={style.icon} />
+                        <Input placeholder="Введите пароль" required value={password} onChange={(e)=>setPassword(e.target.value)} type="password" />
+                        <img src={Lock} alt="person" className={style.icon}  />
                     </div>
                     <div className={style.form_container}>
-                        <button className={style.in} onClick={()=>registerHandler()}>Зарегестрироваться</button>
+                        <button className={style.in} onClick={()=>loginHandler()}>Войти</button>
                     </div>
                 </label>
                 </div>
@@ -73,4 +61,4 @@ const Register:React.FC = () => {
     )
 }
 
-export default Register;
+export default Login;
