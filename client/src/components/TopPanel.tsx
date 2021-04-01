@@ -7,30 +7,55 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
 import style from "../static/style/NavBars.module.sass";
 
-const ModesTesting: React.FC = () => {
+
+
+const TopPanel: React.FC<{ modes: string }> = ({modes}) => {
 
   const [toggleMenu, setToggleMenu] = useState<boolean>(false)
 
   return (
     <div className={style.top_navbar_wrapper}>
-        <ul className={style.modes}>
+      <div  className={style.modes}>
+        <ul>
+         {modes === "testing" ? <>
           <li>
-            <NavLink to="/testingedit"
+          <NavLink to="/testingedit"
             activeStyle={{
                 color: "#000"
               }}
               >Редактирование</NavLink>
           </li>
           <li>
-            <NavLink to="/testingwatch"  activeStyle={{
+          <NavLink to="/testingwatch"  activeStyle={{
                 color: "#000"
               }}>Режим просмотра</NavLink>
           </li>
+          </>:
+          modes === "theory" ?
+          <>
+          <li>
+             <NavLink to="/theoryedit"
+              activeStyle={{
+                color: "#000"
+              }}
+              >Редактирование</NavLink>
+          </li>
+          <li>
+          <NavLink to="/theorywatch"  activeStyle={{
+                color: "#000"
+              }}>Режим просмотра</NavLink>
+          </li>
+          </>
+          :
+          <>
+          </>
+          }
         </ul>
+      </div>
       <div className={style.user} onClick={()=>setToggleMenu(!toggleMenu)}>
-        <p>user</p>
+        <p>user_1</p>
         <div className={style.circle}></div>
-        { toggleMenu && <div className={style.menu}>
+        {toggleMenu && <div className={style.menu}>
           <ul>
             <li>
               <NavLink to="/" className={style.gradient}>
@@ -41,7 +66,7 @@ const ModesTesting: React.FC = () => {
         </div>}
       </div>
     </div>
-  );
+  );  
 };
 
-export default ModesTesting;
+export default TopPanel;

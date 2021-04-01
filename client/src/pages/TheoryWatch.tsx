@@ -9,6 +9,7 @@ import ModesTheory from "../components/ModesTheory";
 import style from "../static/style/Theory.module.sass"
 import axios from "axios";
 import { setSection } from "../redux/actions/SET_SECTION";
+import TopPanel from "../components/TopPanel";
 
 
 const TheoryWatch = () => {
@@ -32,7 +33,7 @@ const TheoryWatch = () => {
         <div className={style.wrapper}>
             <NavBarAdmin />
             <div className={style.content_wrapper}>
-                <ModesTheory />
+                <TopPanel modes={"theory"} />
                 <div className={style.materials_wrapper}>
                 {typeof (sections === Array) ? 
                 sections.map((el:any)=>{

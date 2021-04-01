@@ -1,8 +1,7 @@
 import React from "react";
-import ModesTesting from "../components/ModesTesting";
 import NavBarAdmin from "../components/NavBarAdmin";
 import TestingWrapper from "../components/TestingWrapper";
-import TopNavBarAdmin from "../components/TopNavBarAdmin";
+import TopPanel from "../components/TopPanel";
 
 import style from "../static/style/Testing.module.sass";
 
@@ -15,16 +14,12 @@ const TestingEdit: React.FC = () => {
     <div className={style.wrapper}>
       <NavBarAdmin />
       <div className={style.content_wrapper}>
-        <ModesTesting />
-        <div className={style.test}>{elemTestinWrapper}</div>
-              
-      <div className={style.new_section_wrapper}>
-                <button className={style.new_section} >
-                    добавить
-                </button>
-                </div>
+        <TopPanel modes={"testing"}/>
+        <div className={style.test}>{elemTestinWrapper}</div>        
+        <div className={style.new_section_wrapper}>
+            <button className={style.new_section} >добавить</button>
+        </div>
       </div>
-
     </div>
   );
 };

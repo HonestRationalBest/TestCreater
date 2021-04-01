@@ -1,19 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../static/img/logo.svg";
-
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Typography from "@material-ui/core/Typography";
-
-import CreateIcon from "@material-ui/icons/Create";
-import EventNoteIcon from "@material-ui/icons/EventNote";
-import ExtensionIcon from "@material-ui/icons/Extension";
-import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
-import SettingsIcon from "@material-ui/icons/Settings";
+import Creater from "../static/img/Creater.svg";
+import Tick from "../static/img/Tick Square.svg";
+import Document from "../static/img/Document.svg";
+import People from "../static/img/2 User.svg";
+import Setting from "../static/img/Setting.svg";
 
 import style from "../static/style/NavBars.module.sass";
 
@@ -26,23 +18,23 @@ const NavBarAdmin: React.FC = () => {
           <div className={style.list}>
             <ul>
               <NavLink to="/test_creater">
-                <CreateIcon />
+                <img src={Creater} alt="Creater"/>
                 <li>Конструктор тестов</li>
               </NavLink>
               <NavLink to="/testingedit">
-                <EventNoteIcon />
+              <img src={Tick} alt="Tick"/>
                 <li>Тестирование</li>
               </NavLink>
               <NavLink to="/theoryedit">
-                <ExtensionIcon />
+              <img src={Document} alt="Creater"/>
                 <li>Теория</li>
               </NavLink>
               <NavLink to="/practice">
-                <ImportantDevicesIcon />
+              <img src={People} alt="Creater"/>
                 <li>Практика</li>
               </NavLink>
               <NavLink to="/data_base" className={style.database}>
-                <SettingsIcon />
+              <img src={Setting} alt="Creater"/>
                 <li>База данных</li>
               </NavLink>
             </ul>

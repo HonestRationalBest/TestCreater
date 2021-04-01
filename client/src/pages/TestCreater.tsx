@@ -5,11 +5,12 @@ import { useDispatch } from "react-redux";
 import done from "../static/img/done.svg";
 import add_button from "../static/img/add_button.svg";
 
-import TopNavBarAdmin from "../components/TopNavBarAdmin";
+import TopNavBarAdmin from "../components/TopPanel";
 import NavBarAdmin from "../components/NavBarAdmin";
 
 import style from "../static/style/Test_creater.module.sass";
 import { createTest } from "../redux/actions/CREATE_TEST";
+import TopPanel from "../components/TopPanel";
 
 const TestCreater: React.FC = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const TestCreater: React.FC = () => {
       <div className={style.flex_wrapper}>
         <NavBarAdmin />
         <div className={style.content_wrapper}>
-          <TopNavBarAdmin />
+          <TopPanel modes={""}/>
           <div className={style.content}>
             <div className={style.label}>
               <div className={style.item}>

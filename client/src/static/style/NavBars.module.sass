@@ -3,9 +3,9 @@
     src: url(../fonts/NotoSans-Regular.ttf)
 
 .wrapper
-    width: 340px
+    width: 330px
     min-height: 900px
-    background: #5e44e3
+    background: #396AEB
     font-family: NotoSansRegular
     top: 0px
 
@@ -43,30 +43,53 @@
     font-family: NotoSansRegular
     display: flex
     justify-content: space-between
+    align-items: center
     background: white
-    padding: 22px 0px 
+    padding: 32px 0px 
 
 .user
     display: flex
     justify-content: end
     align-items: center
-    align-self: center
-    color: #5e44e3
-    border: 1px solid#5F44E7
+    background: #396AEB
+    color: #fff
     border-radius: 0 20px 20px 20px
     margin-right: 60px
     height: 36px
     cursor: pointer
-
     & p
-        margin-left: 6px
+        margin-left: 12px
+
+
+.modes
+    display: flex
+    justify-content: flex-start
+    padding: 0px
+    margin-top: 0px
+    display: block
+    height: 0px
+    margin-bottom: 28px 
+    li
+        margin-left: 30px
+    a 
+        text-decoration: none
+        color: #7A7A7A
+    ul
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: 0px 0px 0px 55px
+        list-style: none
+
+.database
+    margin-top: 200px 
 
 .menu
     position: absolute
     float: right
     border-radius: 10px 0px 10px 10px
-    color: #5f44e7
-    top: 14px
+    color: #396AEB
+    top: 8px
     display: inline-block
     padding-top: 50px
     padding-bottom: 25px
@@ -76,22 +99,25 @@
 
     & a
         font-family: NotoSansRegular
+        text-decoration: none
+        color: #000
 
     & li
         text-decoration: none
         font-family: NotoSansRegular
         text-align: left
-        border: 1px solid rgb(84, 132, 255)
+        border: 1px solid #396AEB
         width: 154px
         border-radius: 10px 0px 10px 10px
         padding: 10px 0px 10px 7px
         background: white
 
-.gradient
-    color: transparent
-    -webkit-background-clip: text
-    background: linear-gradient(95.72deg, #5484FF -2.49%, #5F44E7 100.7%)
-    background-clip: text
+        &:hover
+            background: #396AEB
+        &:hover a
+            color: #fff
+
+
 
 .menu li:first-child
     border-radius: 10px 0px 0px 0px
@@ -99,31 +125,10 @@
 .menu li:last-child
     border-radius: 0px 0px 10px 10px
 
-.menu li:hover
-    color: linear-gradient(95.72deg, #5484FF -2.49%, #5F44E7 100.7%)
-    list-style: none
-
 .circle
     border-radius: 50%
-    background: linear-gradient(95.72deg, #5484FF -2.49%, #5F44E7 100.7%)
+    background: #fff
     width: 30px
     height: 30px
     margin-left: 7px
     margin-right: 3px
-
-
-.modes
-    display: flex
-    justify-content: flex-start
-    margin-top: 40px
-
-    li
-        margin-left: 30px
-
-    a 
-        text-decoration: none
-        color: #7A7A7A
-
-
-.database
-    margin-top: 200px 

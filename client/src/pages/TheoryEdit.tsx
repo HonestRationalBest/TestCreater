@@ -9,6 +9,7 @@ import ModesTheory from "../components/ModesTheory";
 import style from "../static/style/Theory.module.sass"
 import axios from "axios";
 import { setSection } from "../redux/actions/SET_SECTION";
+import TopPanel from "../components/TopPanel";
 
 const TheoryEdit = () => {
 
@@ -32,7 +33,7 @@ const TheoryEdit = () => {
         <div className={style.wrapper}>
             <NavBarAdmin />
             <div className={style.content_wrapper}>
-                <ModesTheory />
+                <TopPanel modes={"theory"}/>
                 <div className={style.materials_wrapper}>
                 {sections.map((el:any)=>{
                     return <TopicEdit sectionId={el._id} key={el._id} sectionName={el.name}/>
@@ -44,9 +45,7 @@ const TheoryEdit = () => {
                 </button>
                 </NavLink>
                 </div>
-           
             </div>
-         
         </div>
     );
 }
