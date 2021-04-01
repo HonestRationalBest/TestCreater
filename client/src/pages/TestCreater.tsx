@@ -11,9 +11,46 @@ import NavBarAdmin from "../components/NavBarAdmin";
 import style from "../static/style/Test_creater.module.sass";
 import { createTest } from "../redux/actions/CREATE_TEST";
 import TopPanel from "../components/TopPanel";
+import { FormControlLabel, makeStyles, TextField, withStyles } from "@material-ui/core";
+import { Checkbox } from '@material-ui/core';
+import Question from "../components/Question";
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  margin: {
+    margin: theme.spacing(1),
+    marginTop: 15
+  },
+  text_field: {
+    width: 410,
+    display: "block",
+    marginLeft: 50,
+    marginBottom: 25
+  },
+  checkbox_field:{
+
+  }
+}));
+
+const GreenCheckbox = withStyles({
+  root: {
+    color: "black[400]",
+    '&$checked': {
+      color: "black[600]",
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
+
 
 const TestCreater: React.FC = () => {
   const dispatch = useDispatch();
+
+  const classes = useStyles();
 
   const [visibleToggle, setVisibleToggle] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
@@ -40,59 +77,19 @@ const TestCreater: React.FC = () => {
         <div className={style.content_wrapper}>
           <TopPanel modes={""}/>
           <div className={style.content}>
-            <div className={style.label}>
-              <div className={style.item}>
-                <h3>Выберите раздел</h3>
-                <div className={style.relative}>
-                  <input
-                    placeholder="введите название раздела"
-                    className={style.input}
-                    value={section}
-                  ></input>
-                  {visibleToggle && (
-                    <ul>
-                      {arr.map((el, index) => {
-                        return <li onClick={() => sectionSet(index)}>{el}</li>;
-                      })}
-                    </ul>
-                  )}
-                  <img
-                    alt="add"
-                    src={add_button}
-                    className={style.add}
-                    onClick={() => setVisibleToggle(!visibleToggle)}
-                  />
-                </div>
-              </div>
-              <div className={style.item}>
-                <h3>Количество вопросов</h3>
-                <input
-                  placeholder="введите количество вопросов в тесте"
-                  className={style.input}
-                  onChange={(e) => setQuestionCount(Number(e.target.value))}
-                ></input>
-              </div>
-              <div className={style.item}>
-                <h3>Название теста</h3>
-                <input
-                  placeholder="введите название теста"
-                  className={style.input}
-                  onChange={(e) => setTestName(e.target.value)}
-                ></input>
-              </div>
+            <h2>Создайте тест прямо сейчас</h2>
+            <div>
+              <TextField id="standard-required"  placeholder="Введите название теста" className={classes.text_field}/>
+              <TextField id="standard-required"  placeholder="Выберите раздел для этого теста" className={classes.text_field}/>
             </div>
-            <div className={style.random}>
-              <div>
-                <p>Случайный порядок</p>
-              </div>
-              <button
-                className={style.button}
-                onClick={() => setIsRandom(!isRandom)}
-              >
-                {isRandom ? <img src={done} alt="ok" /> : " "}
-              </button>
+            <div className={style.random_order}>
+            <FormControlLabel
+              control={<GreenCheckbox/>}
+              label="Случайный порядок вопросов"/>
             </div>
-              <button className={style.next}>далее</button>
+            <div className={style.question_wrapper}>
+                <Question/>
+            </div>
           </div>
         </div>
       </div>
