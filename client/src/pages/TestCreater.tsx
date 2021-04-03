@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import add_button from '../static/img/add_button.svg'
 
-import done from "../static/img/done.svg";
-import add_button from "../static/img/add_button.svg";
-
-import TopNavBarAdmin from "../components/TopPanel";
 import NavBarAdmin from "../components/NavBarAdmin";
 
 import style from "../static/style/Test_creater.module.sass";
-import { createTest } from "../redux/actions/CREATE_TEST";
 import TopPanel from "../components/TopPanel";
-import { FormControlLabel, makeStyles, TextField, withStyles } from "@material-ui/core";
+import { Button, ClickAwayListener, FormControlLabel, Grow, makeStyles, MenuItem, MenuList, Paper, Popper, TextField, withStyles } from "@material-ui/core";
 import { Checkbox } from '@material-ui/core';
 import Question from "../components/Question";
 
@@ -26,49 +21,66 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 15
   },
   text_field: {
-    width: 410,
-    display: "block",
+    display: "inline-block",
     marginLeft: 50,
-    marginBottom: 25
+    marginBottom: 25,
+    '& input': {
+      width: 410,
+    }
+  },
+  paper: {
+    marginRight: theme.spacing(2),
   },
   checkbox_field:{
-
+    '& span':{
+      color: "#000"
+    }
+  },
+  menu_wrapper :{
+    width: 410,
+    textAlign: "center",
+    "& li":{
+    }
   }
 }));
 
-const GreenCheckbox = withStyles({
-  root: {
-    color: "black[400]",
-    '&$checked': {
-      color: "black[600]",
-    },
-  },
-  checked: {},
-})((props) => <Checkbox color="default" {...props} />);
-
-
 const TestCreater: React.FC = () => {
-  const dispatch = useDispatch();
 
   const classes = useStyles();
 
-  const [visibleToggle, setVisibleToggle] = useState(false);
-  const [isRandom, setIsRandom] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef<HTMLInputElement>(null);
+  const sectionArray = ["Тест 1","Тест 2","Тест 3"]
 
-  const [section, setSection] = useState<string>("");
-  const [questionCount, setQuestionCount] = useState<number>(0);
-  const [testName, setTestName] = useState<string>("");
-
-  const arr: Array<string> = ["тест 1", "тест 2", "тест 1"];
-
-  const sectionSet: Function = (index: number): void => {
-    setSection(arr[index]);
-    setVisibleToggle(!visibleToggle);
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
   };
 
-  useEffect(() => {
-    dispatch(createTest(section, questionCount, testName, isRandom));
-  }, [section, questionCount, testName, isRandom, dispatch]);
+  const handleClose = (event: React.MouseEvent<EventTarget>) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event: React.KeyboardEvent) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current!.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
 
   return (
     <div>
@@ -80,12 +92,41 @@ const TestCreater: React.FC = () => {
             <h2>Создайте тест прямо сейчас</h2>
             <div>
               <TextField id="standard-required"  placeholder="Введите название теста" className={classes.text_field}/>
-              <TextField id="standard-required"  placeholder="Выберите раздел для этого теста" className={classes.text_field}/>
+              <div className={style.section_choose}>
+        <TextField
+          ref={anchorRef}
+          aria-controls={open ? 'menu-list-grow' : undefined}
+          aria-haspopup="true"
+          
+          className={classes.text_field}
+          placeholder="Выберите раздел для этого теста"
+        >
+          Toggle Menu Grow
+        </TextField>
+        <img src={add_button} alt="add_button" className={style.add_button} onClick={handleToggle} />
+        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal className={classes.menu_wrapper}>
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    {sectionArray.map((elem)=>{
+                      return <MenuItem onClick={handleClose}>{elem}</MenuItem>
+                    })}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      </div>
             </div>
             <div className={style.random_order}>
-            <FormControlLabel
-              control={<GreenCheckbox/>}
-              label="Случайный порядок вопросов"/>
+            <Checkbox className={classes.checkbox_field}/>
+            <p>Случайный порядок вопросов</p>
             </div>
             <div className={style.question_wrapper}>
                 <Question/>

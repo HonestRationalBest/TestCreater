@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 
 import style from "../static/style/NavBars.module.sass";
 
@@ -12,6 +8,12 @@ import style from "../static/style/NavBars.module.sass";
 const TopPanel: React.FC<{ modes: string }> = ({modes}) => {
 
   const [toggleMenu, setToggleMenu] = useState<boolean>(false)
+
+
+  const handleExit = () =>{
+    localStorage.removeItem('userData')
+    window.location.reload()
+  }
 
   return (
     <div className={style.top_navbar_wrapper}>
@@ -58,9 +60,9 @@ const TopPanel: React.FC<{ modes: string }> = ({modes}) => {
         {toggleMenu && <div className={style.menu}>
           <ul>
             <li>
-              <NavLink to="/" className={style.gradient}>
-                Выйти
-              </NavLink>
+              <p className={style.gradient} onClick={handleExit}>
+                Exit
+              </p>
             </li>
           </ul>
         </div>}
