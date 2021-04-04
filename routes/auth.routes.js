@@ -18,6 +18,7 @@ router.post(
    async (req, res) => {
 
         try {
+
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({
@@ -46,6 +47,8 @@ router.post(
     
                     res.status(200).json({ message: "User has been created!" })
                 }
+
+
             }else{
                 const candidate = await Student.findOne({ email })
     
@@ -65,6 +68,7 @@ router.post(
     
                     res.status(200).json({ message: "User has been created!" })
                 }
+
             }
 
         } catch (e) {

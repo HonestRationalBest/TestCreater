@@ -1,4 +1,3 @@
-import React, {useState} from "react";
 import * as yup from 'yup';
 
 import Header from "../components/Header";
@@ -21,43 +20,19 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-interface MyFormValues {
-
-    name: string;
-    email: string;
-    password: string;
- 
-}
-
-interface formErrors{
-    name: string;
-    email: string;
-    password: string;
-}
-
 const validationSchema = yup.object({
     name : yup.string().required().max(10) ,
     email : yup.string().email(),
     password : yup.string().min(6)
 }) 
 
-const Register:React.FC = () => {
-
-    const [login, setLogin] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+const Register = () => {
 
     const classes = useStyles();
 
-
     const history = useHistory()
 
-    const registerHandler = () =>{
-
-    
-        
-    }
-    const initialValues: MyFormValues = { name: '', email: '', password: '' };
+    const initialValues = { name: '', email: '', password: '' };
 
     return (
         <div className={style.wrapper}>
@@ -73,14 +48,16 @@ const Register:React.FC = () => {
                         setSubmitting(true)
                         axios.post('/api/auth/register', 
                         {history: history.location.pathname, 
-                            login, email, password},
+                            login: values.name, email: values.email, password: values.password},
                         {
                             headers: {
                                 'Content-Type': 'application/json'
                             }
                         }).then((res)=>{
                             setSubmitting(false)
-                            console.log(res)
+                            if(res.status === 200){
+                                
+                            }
                         })
                        }}
                        validationSchema={validationSchema}
